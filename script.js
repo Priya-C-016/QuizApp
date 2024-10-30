@@ -97,7 +97,7 @@ function startTimer(){
 function endQuiz(){
     scorevalue.innerText= `${score} / ${totalQues}`;
     if(score===totalQues){performance.innerText="Well Done!";}
-    else if(score < totalQues/2){performance.innerText="You got this!";}
+    else if(score <= totalQues/2){performance.innerText="You got this!";}
     else {performance.innerText="Try Again!";}
     endquiz.style.display="block";
     document.getElementById("quizApp").style.display="none";
