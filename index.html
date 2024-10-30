@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+            border:none;
+            outline:none;
+        }
+        body{
+            background-color: rgb(12, 84, 253);
+            display: flex;
+            justify-content: center;
+            padding:10px;
+        }
+        img{
+            width:100%;
+            object-fit: cover;
+            width:20px;
+        }
+        .startQuiz{
+            width:600px;
+            height:400px;
+            padding:20px 12px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap:50px;
+            position:absolute;
+            transform:translateZ(-50%,-50%);
+            z-index:10;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .starting{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: flex-start;
+            padding:20px;
+            gap:20px;
+            background-color: rgb(232, 232, 238);
+            border-radius: 8px;
+        }
+        #startbtn{
+            background-color: rgb(247, 243, 243);
+            color:rgb(15, 14, 14);
+            height:100px;
+            width:100px;
+            border-radius: 50px;
+            cursor:pointer;
+            font-weight:bold;
+            font-size: 18px;
+        }
+        #startbtn:hover{
+            background-color: blue;
+            scale: 1.2;
+            color:white;
+        }
+        #startbtn img{
+            width:70px;
+            object-fit: cover;
+        }
+        main.quiz-app{
+            display: none;
+            /* display: flex;
+            flex-direction: column;
+            justify-content: center; */
+            /* padding:7px; */
+            width:600px;
+            background-color: white;
+            border-radius:8px;
+            box-shadow: 0 4px 12px rgb(241, 157, 157);
+        }
+        .quiz-app{
+            width:fit-content;
+            height: fit-content;
+            flex-direction: column;
+            display: flex;
+            /* position: relative; */
+            /* align-items: center; */
+            /* justify-content: space-between; */
+        }
+        .quiz-header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* border:2px solid black; */
+            padding:14px 20px;
+            width:600px;
+            box-shadow:0 4px 9px 2px rgb(179, 178, 178) ;
+        }
+        .quiz-header-content{
+            display: flex;
+            align-items: center;
+            flex-direction: flex-start; 
+             width:600px;
+        }
+        .quiz-title{
+          font-size: 20px;
+          flex:1;
+        }
+        .quiz-timer{
+            font-size: 16px;
+            background-color: #aed1f5;
+            padding:8px;
+            border-radius: 4px;
+            color: rgb(30, 30, 244);
+        }
+        .quiz-timer-value{
+            background-color: #3226;
+            color:white;
+            border-radius: 4px;
+            padding:4px 8px;
+        }
+        .quiz-progress{
+            height:4px;
+            background-color: blue;
+            width:100%;
+            transition: width 0.3s ease;
+        }
+        .quiz-ques-container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top:18px;
+            padding-bottom:28px;
+            /* border:2px solid black; */
+        }
+        .quiz-ques{
+            display: flex;
+            align-items: center;
+            /* gap:10px; */
+            padding:4px 12px;
+        }
+        .quiz-ques-text{
+           text-overflow: ellipsis;
+           text-wrap: wrap;
+           font-size: 23px;
+        }
+        .options{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap:10px;
+            padding:4px 12px;
+            cursor: pointer;
+            
+        }
+        .quiz-option:hover{
+            background-color: rgb(81, 161, 246);
+        }
+        .quiz-option{
+            padding:10px;
+            background-color: #eff8ff;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            border:1px solid #c1d9ec;
+            border-radius:4px;
+        }
+        .quiz-option.correct{
+            background-color:lightgreen ;
+            border-color:green;
+            color:green;
+        }
+        .quiz-option.incorrect{
+            color:rgb(85, 5, 5);
+            background-color:rgb(241, 157, 157);
+            border-color: red;
+        }
+        .quiz-ques-left{
+            padding:16px 20px;
+            font-size: 17px;
+        }
+        .quiz-ques-left span{
+            font-weight:bold;
+        }
+        .line{
+            background-color: rgb(221, 221, 221);
+            padding:2px;
+        }
+        .options .quiz-option:not(.correct):not(.incorrect) .quiz-option-image{
+            display: none;
+        }
+        .options .quiz-option.correct .quiz-option-image{
+            content: url("tick-circle-svgrepo-com.svg");
+        }
+        .options .quiz-option.incorrect .quiz-option-image{
+            content:url("wrong-delete-remove-trash-minus-cancel-close-svgrepo-com.svg");
+        }
+
+    .endquiz{
+        width:600px;
+        height:300px;
+        background-color: rgb(246, 242, 242);
+        padding:80px;
+        border-radius: 15px;
+        border:3px solid black;
+        gap:12px;
+        
+    }
+    .score-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+    .score-text{
+        font-family: Impact;
+        font-size: 45px;
+    }
+     #performance{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        align-items: center;
+        padding:15px 20px;
+        font-size: 20px; 
+     }   
+    </style>
+</head>
+<body>
+    <div class="startQuiz">
+        <h1>Play the Quiz!</h1>
+        <div class="starting">
+            <span>Select Number of Questions</span>
+            <select id="numberofQuestions">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+            </select><br>
+            <span> Select Difficulty level</span>
+            <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+        <button id="startbtn">Start Quiz</button>
+    </div>
+    <main class="quiz-app" id="quizApp">
+        <div class="quiz-header">
+            <h1 class="quiz-title">Awesome Quiz Application</h1>
+            <div class="quiz-timer">Time Left <span class="quiz-timer-value">08</span> s</div>
+        </div>
+        <div class="quiz-header-content">
+            <div class="quiz-progress"></div>
+        </div>
+        <div class="quiz-ques-container">
+            <h2 class="quiz-ques"><span class="quiz-ques-number"></span><span class="quiz-ques-text"></span></h2>
+           <div class="options">
+            <button class="quiz-option"><span class="quiz-option-text">A</span><img class="quiz-option-image" ></button>
+            <button class="quiz-option"><span class="quiz-option-text">B</span><img class="quiz-option-image" ></button>
+            <button class="quiz-option"><span class="quiz-option-text">C</span><img class="quiz-option-image" src="tick-circle-svgrepo-com.svg"></button>
+            <button class="quiz-option"><span class="quiz-option-text">D</span><img class="quiz-option-image"></button>
+           </div>
+        </div>
+        <div class="line"></div>
+        <div class="quiz-ques-left">
+           <span class="ques-number">1</span> of <span class="total">5</span> Questions
+        </div>
+    </main>
+    <div class="endquiz" style="display: none;" >
+        <div class="score-container">
+            <div class="score-text">Score: <span id=scorevalue>0</span></div>
+            <span id="performance">Well done!</span>
+        </div>
+        
+    </div>
+    <!-- <script src="response.json"></script> -->
+    <script src="script.js" type="module"></script>
+</body>
+</html>
